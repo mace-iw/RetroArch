@@ -7512,7 +7512,7 @@ static void netplay_toggle_play_spectate(netplay_t *netplay)
    }
 }
 
-static int16_t netplay_input_state(netplay_t *netplay,
+static int32_t netplay_input_state(netplay_t *netplay,
       unsigned port, unsigned device,
       unsigned idx, unsigned id)
 {
@@ -8457,7 +8457,7 @@ static bool netplay_mitm_query(const char *handle)
    return !string_is_empty(host_room->mitm_address) && host_room->mitm_port;
 }
 
-int16_t input_state_net(unsigned port, unsigned device,
+int32_t input_state_net(unsigned port, unsigned device,
       unsigned idx, unsigned id)
 {
    net_driver_state_t *net_st  = &networking_driver_st;

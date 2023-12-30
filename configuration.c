@@ -295,6 +295,12 @@ const struct input_bind_map input_config_bind_map[RARCH_BIND_LIST_END_NULL] = {
    DECLARE_BIND(r2,                            RETRO_DEVICE_ID_JOYPAD_R2,    MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_R2),
    DECLARE_BIND(l3,                            RETRO_DEVICE_ID_JOYPAD_L3,    MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_L3),
    DECLARE_BIND(r3,                            RETRO_DEVICE_ID_JOYPAD_R3,    MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_R3),
+   DECLARE_BIND(6a,                            RETRO_DEVICE_ID_JOYPAD_6A,    MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_6A),
+   DECLARE_BIND(6b,                            RETRO_DEVICE_ID_JOYPAD_6B,    MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_6B),
+   DECLARE_BIND(6c,                            RETRO_DEVICE_ID_JOYPAD_6C,    MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_6C),
+   DECLARE_BIND(6x,                            RETRO_DEVICE_ID_JOYPAD_6X,    MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_6X),
+   DECLARE_BIND(6y,                            RETRO_DEVICE_ID_JOYPAD_6Y,    MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_6Y),
+   DECLARE_BIND(6z,                            RETRO_DEVICE_ID_JOYPAD_6Z,    MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_6Z),
    DECLARE_BIND(l_x_plus,                      RARCH_ANALOG_LEFT_X_PLUS,     MENU_ENUM_LABEL_VALUE_INPUT_ANALOG_LEFT_X_PLUS),
    DECLARE_BIND(l_x_minus,                     RARCH_ANALOG_LEFT_X_MINUS,    MENU_ENUM_LABEL_VALUE_INPUT_ANALOG_LEFT_X_MINUS),
    DECLARE_BIND(l_y_plus,                      RARCH_ANALOG_LEFT_Y_PLUS,     MENU_ENUM_LABEL_VALUE_INPUT_ANALOG_LEFT_Y_PLUS),
@@ -6039,10 +6045,12 @@ bool input_config_bind_map_get_valid(unsigned bind_index)
 
 unsigned input_config_bind_map_get_meta(unsigned bind_index)
 {
+   printf("HERE\n");
    const struct input_bind_map *keybind =
       (const struct input_bind_map*)INPUT_CONFIG_BIND_MAP_GET(bind_index);
    if (!keybind)
       return 0;
+   printf("HERE2\n");
    return keybind->meta;
 }
 

@@ -3941,6 +3941,30 @@ MSG_HASH(
    "D-Pad Right"
    )
 MSG_HASH(
+   MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_6A,
+   "A Button"
+   )
+MSG_HASH(
+   MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_6B,
+   "B Button"
+   )
+MSG_HASH(
+   MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_6C,
+   "C Button"
+   )
+MSG_HASH(
+   MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_6X,
+   "X Button"
+   )
+MSG_HASH(
+   MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_6Y,
+   "Y Button"
+   )
+MSG_HASH(
+   MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_6Z,
+   "Z Button"
+   )
+MSG_HASH(
    MENU_ENUM_LABEL_VALUE_INPUT_JOYPAD_A,
    "A Button (Right)"
    )
@@ -14170,7 +14194,7 @@ MSG_HASH(
    )
 MSG_HASH(
    MSG_LOADING_HISTORY_FILE,
-   "Loading history file"
+   "Loading jobby file"
    )
 MSG_HASH(
    MSG_LOADING_FAVORITES_FILE,

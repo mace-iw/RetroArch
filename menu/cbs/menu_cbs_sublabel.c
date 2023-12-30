@@ -786,7 +786,9 @@ DEFAULT_SUBLABEL_MACRO(action_bind_sublabel_joypad_driver,                 MENU_
 DEFAULT_SUBLABEL_MACRO(action_bind_sublabel_audio_resampler_driver,        MENU_ENUM_SUBLABEL_AUDIO_RESAMPLER_DRIVER)
 DEFAULT_SUBLABEL_MACRO(action_bind_sublabel_camera_driver,                 MENU_ENUM_SUBLABEL_CAMERA_DRIVER)
 DEFAULT_SUBLABEL_MACRO(action_bind_sublabel_location_driver,               MENU_ENUM_SUBLABEL_LOCATION_DRIVER)
+#if 0
 DEFAULT_SUBLABEL_MACRO(action_bind_sublabel_menu_driver,                   MENU_ENUM_SUBLABEL_MENU_DRIVER)
+#endif
 DEFAULT_SUBLABEL_MACRO(action_bind_sublabel_record_driver,                 MENU_ENUM_SUBLABEL_RECORD_DRIVER)
 DEFAULT_SUBLABEL_MACRO(action_bind_sublabel_midi_driver,                   MENU_ENUM_SUBLABEL_MIDI_DRIVER)
 #ifdef HAVE_BLUETOOTH
@@ -3767,9 +3769,11 @@ int menu_cbs_init_bind_sublabel(menu_file_list_cbs_t *cbs,
          case MENU_ENUM_LABEL_MIDI_DRIVER:
             BIND_ACTION_SUBLABEL(cbs, action_bind_sublabel_midi_driver);
             break;
+#if 0
          case MENU_ENUM_LABEL_MENU_DRIVER:
             BIND_ACTION_SUBLABEL(cbs, action_bind_sublabel_menu_driver);
             break;
+#endif
          case MENU_ENUM_LABEL_LOCATION_DRIVER:
             BIND_ACTION_SUBLABEL(cbs, action_bind_sublabel_location_driver);
             break;

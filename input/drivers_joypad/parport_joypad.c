@@ -346,13 +346,13 @@ static int32_t parport_joypad_button(unsigned port, uint16_t joykey)
 /* TODO/FIXME - Parport does not support analog sticks */
 static int16_t parport_joypad_axis(unsigned port, uint32_t joyaxis) { return 0; }
 
-static int16_t parport_joypad_state(
+static int32_t parport_joypad_state(
       rarch_joypad_info_t *joypad_info,
       const struct retro_keybind *binds,
       unsigned port)
 {
    unsigned i;
-   int16_t ret                          = 0;
+   int32_t ret                          = 0;
    uint16_t port_idx                    = joypad_info->joy_idx;
    const struct parport_joypad     *pad = (const struct parport_joypad*)
       &parport_pads[port_idx];

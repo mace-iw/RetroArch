@@ -37,7 +37,7 @@
 #include "runloop.h"
 #include "verbosity.h"
 
-static int16_t input_state_get_last(unsigned port,
+static int32_t input_state_get_last(unsigned port,
       unsigned device, unsigned index, unsigned id)
 {
    runloop_state_t      *runloop_st = runloop_state_get_ptr();
@@ -810,17 +810,17 @@ static void runahead_input_state_set_last(
    }
 }
 
-static int16_t runahead_input_state_with_logging(unsigned port,
+static int32_t runahead_input_state_with_logging(unsigned port,
       unsigned device, unsigned index, unsigned id)
 {
    runloop_state_t     *runloop_st  = runloop_state_get_ptr();
 
    if (runloop_st->input_state_callback_original)
    {
-      int16_t result                =
+      int32_t result                =
          runloop_st->input_state_callback_original(
             port, device, index, id);
-      int16_t last_input            =
+      int32_t last_input            =
          input_state_get_last(port, device, index, id);
       if (result != last_input)
          runloop_st->flags         |= RUNLOOP_FLAG_INPUT_IS_DIRTY;
@@ -1329,7 +1329,7 @@ force_input_dirty:
 
 /* Preemptive Frames */
 
-static int16_t preempt_input_state(unsigned port,
+static int32_t preempt_input_state(unsigned port,
       unsigned device, unsigned index, unsigned id)
 {
    settings_t *settings         = config_get_ptr();

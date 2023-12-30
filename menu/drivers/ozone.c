@@ -325,6 +325,12 @@ enum
    OZONE_ENTRIES_ICONS_TEXTURE_INPUT_MOUSE,
    OZONE_ENTRIES_ICONS_TEXTURE_INPUT_LGUN,
    OZONE_ENTRIES_ICONS_TEXTURE_INPUT_TURBO,
+   OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6A,
+   OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6B,
+   OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6C,
+   OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6X,
+   OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6Y,
+   OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6Z,
    OZONE_ENTRIES_ICONS_TEXTURE_LAST
 };
 
@@ -2368,9 +2374,9 @@ static uintptr_t ozone_entries_icon_get_texture(
                return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_RELOAD];
             if (type == input_id + 5)
                return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_SAVING];
-            if ((type > (input_id + 29)) && (type < (input_id + 41)))
+            if ((type > (input_id + 35)) && (type < (input_id + 47)))
                return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_LGUN];
-            if (type == input_id + 41)
+            if (type == input_id + 47)
                return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_TURBO];
             /* align to use the same code of Quickmenu controls*/
             input_id = input_id + 6;
@@ -2434,21 +2440,35 @@ static uintptr_t ozone_entries_icon_get_texture(
             return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_P];
          if (type == (input_id + 15))
             return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_P];
+
          if (type == (input_id + 16))
-            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_U];
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6A];
          if (type == (input_id + 17))
-            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_D];
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6B];
          if (type == (input_id + 18))
-            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_L];
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6C];
          if (type == (input_id + 19))
-            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_R];
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6X];
          if (type == (input_id + 20))
-            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_U];
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6Y];
          if (type == (input_id + 21))
-            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_D];
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6Z];
+
          if (type == (input_id + 22))
-            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_L];
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_U];
          if (type == (input_id + 23))
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_D];
+         if (type == (input_id + 24))
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_L];
+         if (type == (input_id + 25))
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_R];
+         if (type == (input_id + 26))
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_U];
+         if (type == (input_id + 27))
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_D];
+         if (type == (input_id + 28))
+            return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_L];
+         if (type == (input_id + 29))
             return ozone->icons_textures[OZONE_ENTRIES_ICONS_TEXTURE_INPUT_STCK_R];
       }
 
@@ -2682,6 +2702,18 @@ static const char *ozone_entries_icon_texture_path(unsigned id)
          return "input_BTN-L.png";
       case OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_R:
          return "input_BTN-R.png";
+      case OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6A:
+         return "input_BTN-6A.png";
+      case OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6B:
+         return "input_BTN-6A.png";
+      case OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6C:
+         return "input_BTN-6A.png";
+      case OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6X:
+         return "input_BTN-6A.png";
+      case OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6Y:
+         return "input_BTN-6A.png";
+      case OZONE_ENTRIES_ICONS_TEXTURE_INPUT_BTN_6Z:
+         return "input_BTN-6A.png";
       case OZONE_ENTRIES_ICONS_TEXTURE_INPUT_LB:
          return "input_LB.png";
       case OZONE_ENTRIES_ICONS_TEXTURE_INPUT_RB:

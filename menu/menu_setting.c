@@ -9131,6 +9131,7 @@ static bool setting_append_list_input_player_options(
          msg_hash_to_str(MENU_ENUM_LABEL_VALUE_NOT_AVAILABLE);
       for (j = 0; j < RARCH_BIND_LIST_END; j++)
       {
+         printf("GET BINDMAP j%d \n", j);
          char label[NAME_MAX_LENGTH];
          char name[NAME_MAX_LENGTH];
          size_t _len = 0;
@@ -9179,6 +9180,7 @@ static bool setting_append_list_input_player_options(
                   sizeof(label) - _len);
 
          snprintf(name, sizeof(name), "p%u_%s", user + 1, input_config_bind_map_get_base(i));
+         printf("name: %s\n", name);
 
          CONFIG_BIND_ALT(
                list, list_info,
@@ -15318,6 +15320,7 @@ static bool setting_append_list(
 
             for (i = 0; i < RARCH_BIND_LIST_END; i ++)
             {
+               printf("GET BINDMAP i%d \n", i);
                if (!input_config_bind_map_get_meta(i))
                   continue;
 #ifndef HAVE_QT

@@ -4506,7 +4506,7 @@ static bool core_verify_api_version(runloop_state_t *runloop_st)
    return true;
 }
 
-static int16_t core_input_state_poll_late(unsigned port,
+static int32_t core_input_state_poll_late(unsigned port,
       unsigned device, unsigned idx, unsigned id)
 {
    runloop_state_t     *runloop_st       = &runloop_state;
@@ -4532,6 +4532,7 @@ static void core_input_state_poll_maybe(void)
 
 static retro_input_state_t core_input_state_poll_return_cb(void)
 {
+   printf("[RA]core_input_state_poll_return_cb() called\n");
    runloop_state_t *runloop_st = &runloop_state;
    const enum poll_type_override_t
       core_poll_type_override  = runloop_st->core_poll_type_override;

@@ -92,7 +92,7 @@
 )
 
 /* Human readable order of input binds */
-const unsigned input_config_bind_order[24] = {
+const unsigned input_config_bind_order[30] = {
    RETRO_DEVICE_ID_JOYPAD_UP,
    RETRO_DEVICE_ID_JOYPAD_DOWN,
    RETRO_DEVICE_ID_JOYPAD_LEFT,
@@ -109,14 +109,20 @@ const unsigned input_config_bind_order[24] = {
    RETRO_DEVICE_ID_JOYPAD_R2,
    RETRO_DEVICE_ID_JOYPAD_L3,
    RETRO_DEVICE_ID_JOYPAD_R3,
-   19, /* Left Analog Up */
-   18, /* Left Analog Down */
-   17, /* Left Analog Left */
-   16, /* Left Analog Right */
-   23, /* Right Analog Up */
-   22, /* Right Analog Down */
-   21, /* Right Analog Left */
-   20, /* Right Analog Right */
+   RETRO_DEVICE_ID_JOYPAD_6A,
+   RETRO_DEVICE_ID_JOYPAD_6B,
+   RETRO_DEVICE_ID_JOYPAD_6C,
+   RETRO_DEVICE_ID_JOYPAD_6X,
+   RETRO_DEVICE_ID_JOYPAD_6Y,
+   RETRO_DEVICE_ID_JOYPAD_6Z,
+   22, /* Left Analog Up */
+   23, /* Left Analog Down */
+   24, /* Left Analog Left */
+   25, /* Left Analog Right */
+   26, /* Right Analog Up */
+   27, /* Right Analog Down */
+   28, /* Right Analog Left */
+   29, /* Right Analog Right */
 };
 
 /**************************************/
@@ -688,7 +694,8 @@ bool input_driver_button_combo(
    return false;
 }
 
-static int16_t input_state_wrap(
+/* This function is what ultimately gets the input values. */
+static int32_t input_state_wrap(
       input_driver_t *current_input,
       void *data,
       const input_device_driver_t *joypad,
@@ -701,7 +708,7 @@ static int16_t input_state_wrap(
       unsigned idx,
       unsigned id)
 {
-   int16_t ret                   = 0;
+   int32_t ret                   = 0;
 
    if (!binds)
       return 0;
@@ -718,6 +725,11 @@ static int16_t input_state_wrap(
          if (sec_joypad)
             ret                    |= sec_joypad->state(
                   joypad_info, binds[_port], _port);
+
+         // if (_port == 0)
+         // {
+         //    printf("[RA]input_state_wrap: ret = %d\n", ret);
+         // }
       }
       else
       {
@@ -1186,17 +1198,19 @@ input_remote_t *input_driver_init_remote(
 }
 #endif
 
-static int16_t input_state_device(
+static int32_t input_state_device(
       input_driver_state_t *input_st,
       settings_t *settings,
       input_mapper_t *handle,
       unsigned input_analog_dpad_mode,
-      int16_t ret,
+      int32_t ret,
       unsigned port, unsigned device,
       unsigned idx, unsigned id,
       bool button_mask)
 {
-   int16_t res  = 0;
+   if (port == 0)
+      printf("[RA]input_state_device() called for port %d, device %d, idx %d, id %d\n", port, device, idx, id);
+   int32_t res  = 0;
 
    switch (device)
    {
@@ -1227,6 +1241,9 @@ static int16_t input_state_device(
                   else
                      res = ret;
                }
+
+               if (port == 0)
+                  printf("[RA]input_state_device() ret = %d, res = %d, bind_valid = %d, id = %d, remap_button = %d\n", ret, res, bind_valid, id, remap_button);
 
                if (BIT256_GET(handle->buttons[port], id))
                   res = 1;
@@ -1529,11 +1546,13 @@ static int16_t input_state_device(
          break;
    }
 
+   if (port == 0)
+      printf("[RA]input_state_device() returning %d\n", res);
    return res;
 }
 
 
-static int16_t input_state_internal(
+static int32_t input_state_internal(
       input_driver_state_t *input_st,
       settings_t *settings,
       unsigned port, unsigned device,
@@ -1560,7 +1579,7 @@ static int16_t input_state_internal(
 #endif
    bool bitmask_enabled                    = false;
    unsigned max_users                      = settings->uints.input_max_users;
-   int16_t result                          = 0;
+   int32_t result                          = 0;
 
    device                                 &= RETRO_DEVICE_MASK;
    bitmask_enabled                         =    (device == RETRO_DEVICE_JOYPAD)
@@ -1571,8 +1590,8 @@ static int16_t input_state_internal(
     * 'virtual' port index */
    while ((mapped_port = *(input_remap_port_map++)) < MAX_USERS)
    {
-      int16_t ret                     = 0;
-      int16_t port_result             = 0;
+      int32_t ret                     = 0;
+      int32_t port_result             = 0;
       unsigned input_analog_dpad_mode = settings->uints.input_analog_dpad_mode[mapped_port];
 
       joypad_info.joy_idx             = settings->uints.input_joypad_index[mapped_port];
@@ -1700,6 +1719,8 @@ static int16_t input_state_internal(
                   input_analog_dpad_mode, ret, mapped_port,
                   device, idx, id, false);
       }
+
+      printf("[RA]input_state_internal() port_result = %d\n", port_result);
 
       /* Digital values are represented by a bitmap;
        * we can just perform the logical OR of
@@ -5387,6 +5408,7 @@ bool replay_set_serialized_data(void* buf)
 
 void input_driver_poll(void)
 {
+   //printf("input_driver_poll called\n");
    size_t i, j;
    rarch_joypad_info_t joypad_info[MAX_USERS];
    input_driver_state_t *input_st = &input_driver_st;
@@ -5863,21 +5885,23 @@ void input_driver_poll(void)
 #endif
 }
 
-int16_t input_driver_state_wrapper(unsigned port, unsigned device,
+int32_t input_driver_state_wrapper(unsigned port, unsigned device,
       unsigned idx, unsigned id)
 {
+   if (port == 0)
+      printf("[RA] input_driver_state_wrapper() called for port %d, device %d, idx %d, id %d\n", port, device, idx, id);
    input_driver_state_t
       *input_st                = &input_driver_st;
    settings_t *settings        = config_get_ptr();
-   int16_t result              = 0;
+   int32_t result              = 0;
 #ifdef HAVE_BSV_MOVIE
    /* Load input from BSV record, if enabled */
    if (BSV_MOVIE_IS_PLAYBACK_ON())
    {
-      int16_t bsv_result = 0;
+      int32_t bsv_result = 0;
       if (intfstream_read(
                input_st->bsv_movie_state_handle->file,
-               &bsv_result, 2) == 2)
+               &bsv_result, 4) == 4)
       {
 #ifdef HAVE_CHEEVOS
          rcheevos_pause_hardcore();
@@ -5903,11 +5927,13 @@ int16_t input_driver_state_wrapper(unsigned port, unsigned device,
    /* Save input to BSV record, if enabled */
    if (BSV_MOVIE_IS_RECORDING())
    {
-      result = swap_if_big16(result);
-      intfstream_write(input_st->bsv_movie_state_handle->file, &result, 2);
+      result = swap_if_big32(result);
+      intfstream_write(input_st->bsv_movie_state_handle->file, &result, 4);
    }
 #endif
 
+   if (port == 0)
+      printf("[RA] input_driver_state_wrapper() returning %d\n", result);
    return result;
 }
 
