@@ -1209,7 +1209,7 @@ static int32_t input_state_device(
       bool button_mask)
 {
    if (port == 0)
-      printf("[RA]input_state_device() called for port %d, device %d, idx %d, id %d\n", port, device, idx, id);
+      RARCH_DBG("[Controller] input_state_device() called for port %d, device %d, idx %d, id %d\n", port, device, idx, id);
    int32_t res  = 0;
 
    switch (device)
@@ -1243,7 +1243,7 @@ static int32_t input_state_device(
                }
 
                if (port == 0)
-                  printf("[RA]input_state_device() ret = %d, res = %d, bind_valid = %d, id = %d, remap_button = %d\n", ret, res, bind_valid, id, remap_button);
+                  RARCH_DBG("[Controller] input_state_device() ret = %d, res = %d, bind_valid = %d, id = %d, remap_button = %d\n", ret, res, bind_valid, id, remap_button);
 
                if (BIT256_GET(handle->buttons[port], id))
                   res = 1;
@@ -1547,7 +1547,7 @@ static int32_t input_state_device(
    }
 
    if (port == 0)
-      printf("[RA]input_state_device() returning %d\n", res);
+      RARCH_DBG("[Controller] input_state_device() returning %d\n", res);
    return res;
 }
 
@@ -1720,7 +1720,7 @@ static int32_t input_state_internal(
                   device, idx, id, false);
       }
 
-      printf("[RA]input_state_internal() port_result = %d\n", port_result);
+      RARCH_DBG("[Controller] input_state_internal() port_result = %d\n", port_result);
 
       /* Digital values are represented by a bitmap;
        * we can just perform the logical OR of
@@ -5889,7 +5889,7 @@ int32_t input_driver_state_wrapper(unsigned port, unsigned device,
       unsigned idx, unsigned id)
 {
    if (port == 0)
-      printf("[RA] input_driver_state_wrapper() called for port %d, device %d, idx %d, id %d\n", port, device, idx, id);
+      RARCH_DBG("[Controller] input_driver_state_wrapper() called for port %d, device %d, idx %d, id %d\n", port, device, idx, id);
    input_driver_state_t
       *input_st                = &input_driver_st;
    settings_t *settings        = config_get_ptr();
@@ -5933,7 +5933,7 @@ int32_t input_driver_state_wrapper(unsigned port, unsigned device,
 #endif
 
    if (port == 0)
-      printf("[RA] input_driver_state_wrapper() returning %d\n", result);
+      RARCH_DBG("[Controller] input_driver_state_wrapper() returning %d\n", result);
    return result;
 }
 
