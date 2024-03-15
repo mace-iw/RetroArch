@@ -6045,12 +6045,12 @@ bool input_config_bind_map_get_valid(unsigned bind_index)
 
 unsigned input_config_bind_map_get_meta(unsigned bind_index)
 {
-   RARCH_DBG("[Controller] input_config_bind_map_get_meta() start\n");
+   // RARCH_DBG("[Controller] input_config_bind_map_get_meta() start\n");
    const struct input_bind_map *keybind =
       (const struct input_bind_map*)INPUT_CONFIG_BIND_MAP_GET(bind_index);
    if (!keybind)
       return 0;
-   RARCH_DBG("[Controller] input_config_bind_map_get_meta() end\n");
+   // RARCH_DBG("[Controller] input_config_bind_map_get_meta() end\n");
    return keybind->meta;
 }
 
